@@ -5,18 +5,17 @@
 \usepackage{amsmath}
 \usepackage[flushleft]{threeparttable} 
 \usepackage{array}
-\setlength\extrarowheight{2pt}
+\setlength\extrarowheight{  2pt}
 
-\newcommand{\nTOri}{10} 
-\newcommand{\nVbig}{39}
-\newcommand{\nVsmall}{40}
-\newcommand{\nLP}{11}
+\newcommand{\example}{V380 Ori-NE}
+\newcommand{\tex}{$T_{\rm ex}$}
 \newcommand{\nrobeam}{$21\arcsec$}
 \newcommand{\resolutionpc}{$0.04$~pc}
 \newcommand{\distance}{$414$~pc}
 \newcommand{\Msun}{$M_\odot$}
 \newcommand{\Mdot}{$M_\odot$~yr$^{-1}$}
 \newcommand{\kms}{km~s$^{-1}$}
+
 
 \newcommand{\co}[1][]{\ensuremath{^{#1}}CO}
 \newcommand{\bothco}{\co[12] and \co[13]}
@@ -60,33 +59,79 @@
 
 \section{Description of Outflows}
 
-\subsection{Outflow Identification}
+\subsection{Outflow Identification}\label{sec:identification}
 
 \subsection{Driving Sources}
 
 
 \section{Physical Properties of Outflows - draw from Dunham et al. 2014, Zhang et al. 2016, Tanabe et al. 2019}
-To calculate the physical properties of outflows, we adapt methods described by \citet{Arce01}, \citet{Dunham14}, and \citet{ZhangY16}.
+To calculate the physical properties of outflows, we adapt the methods described by \citet{Arce01}, \citet{Dunham14}, and \citet{ZhangY16}. 
 
+\subsection{Extracting Outflow Emission}\label{sec:extraction}
+To measure the outflow mass, we must first extract each outflow from the surrounding cloud. This is particularly difficult in Orion, where many outflows are clustered and overlapping. We use a two-step approach to extract each outflow lobe.
+
+First, we integrate the $^{12}$CO cube over the visually estimated velocity range of the outflow lobe (\textcolor{red}{discussed in Section~\ref{sec:identification}}). We select pixels above $5\sigma$ in this integrated map of high-velocity emission, excluding insignificant noise from the outflow. Next, we draw a region around each outflow lobe by hand to remove other overlapping outflows or other cloud structures in the area. %Maybe mention some especially difficult cases of outflows to extract? And compare to how tanabe does it?
+
+To summarize, those pixels above $5\sigma$ in integrated high-velocity $^{12}$CO and which are visually inside the outflow are included in determining the physical properties of the outflow. The regions included in each outflow are shown in the Appendix. DO WE SHOW AN OUTFLOW MASK EXAMPLE FOR ONE OUTFLOW AS A SEPARATE FIGURE? 
+
+\subsection{Systemic Velocity}\label{sec:vsys}
+To calculate outflow energetics, we need to know the systemic velocity $v_{\rm sys}$ of the outflow source. We use the CARMA-NRO Orion C$^{18}$O data \citep{Kong18} for this purpose. We fit a gaussian model to the average C$^{18}$O spectrum within a 15\arcsec{} radius around the outflow source and define the mean of this gaussian to be $v_{\rm sys}$. In most cases, there is only one significant velocity component in the C$^{18}$O spectrum. In the few outflows where multiple velocity components are detected, we adopt the velocity of the most significant component as $v_{\rm sys}$.
+
+\subsubsection{Excitation Temperature}\label{sec:tex}
+We estimate the excitation temperature of $^{12}$CO, \tex, using the equation from \citet{Rohlfs96}, which assume $^{12}$CO is optically thick in the line core:
+
+\begin{equation}\label{eq:Tex}
+T_{\rm ex} = \frac{5.53}{ln(1 + [5.53/(T_{\rm peak} + 0.82)])}.
+\end{equation}
+
+We define $T_{\rm peak}$ for each outflow to be the peak temperature of the average $^{12}$CO spectrum toward the outflow area defined in Section~\ref{sec:extraction}. Figure~\ref{fig:tex} shows the average $^{12}$CO spectrum with $T_{\rm peak}$ indicated for the \example{} outflow.
+
+
+\subsection{$^{12}$CO Opacity Correction}\label{sec:opacity}
+In Orion, \co[12] is usually optically thick \citep{Kong18}. Therefore, if we do not correct for opacity we may miss a substantial amount of outflow mass. By comparing to more optically thin tracers, studies have long shown that outflows tend to be optically thick in $^{12}$CO, at least at lower velocities \citep[e.g.,][]{Goldsmith84,Arce01}. \citet{Dunham14} find that correcting for the optical depth of outflows increases their mass by a factor of 3 on average. Despite this, outflow studies that lack an optically thin tracer often assume that all outflow emission is optically thin \citep[e.g. in Orion,][]{Morgan91,Takahashi08}. 
+
+\citet{Tanabe:submitted} adopt an average \co[12]{} optical depth of 5 for their entire outflow catalog. They apply this constant correction factor to every velocity channel. But \citet{Dunham14} show that the optical depth varies with velocity: optical depth decreases with increasing velocity away from the cloud core. We follow \citet{Dunham14} and \citet{ZhangY16} and use the ratio of $^{12}$CO / $^{13}$CO to derive a velocity-dependent opacity correction for each outflow.
+
+We assume both \co[12]{} and \co[13]{} are in LTE with the same excitation temperature and \co[13]{} is optically thin. Then the ratio between the two isotopes is
+
+\begin{equation}\label{eq:Tratio}
+\frac{T_{\rm \co[12]}}{T_{\rm \co[13]}} = \frac{[\rm{\co[12]}]}{[\rm{\co[13]}]} \frac{1 - e^{-\tau_{12}}}{\tau_{12}},
+\end{equation}
+
+where we assume the abundance ratio [\co[12]]/[\co[13]] is 62 \citep{Langer93} and $\tau_{12}$ is the optical depth of \co[12]{}. We calculate the mean ratio between \co[12]{} and \co[13]{} spectra in each outflow region, only including voxels with both \co[12]{} and \co[13]{} detected at $5\sigma$. 
+
+\co[13]{} is usually too weak to detect more than 2-3 \kms{} away from the line core. Thus we extrapolate the measured ratio spectrum by fitting it with a 2nd-order polynomial, weighting each velocity channel by the standard deviation of the ratio in that channel. For each velocity, we use the value of this fit and Equation \ref{eq:Tratio} to calculate the correction factor $\tau_{12}$/(1 - $e^{-\tau_{12}}$) with which we multiply the observed \co[12]{}. Because the opacity correction factor cannot be less than one for any value of $\tau_{12}$, the ratio spectrum fit is capped at the value of [\co[12]]/[\co[13]] and here we consider \co[12]{} optically thin.
+
+In Figure~\ref{fig:opacity}, we show an example of the \co[12]{}/\co[13]{} ratio spectrum and fit for the \example{} outflow. 
+
+%%%% DISCUSS THE MASS SPECTRUM, MAYBE BEFORE THE LOW-VELOCITY SECTION?
 \subsection{Mass, Momentum, and Kinetic Energy}
-To measure the outflow mass, we must first extract each outflow from the surrounding emission. 
+After correcting for opacity, we use the \co[12]{} emission to calculate the H$_2$ column density in each velocity channel. From Equation A6 in \citet{ZhangY16},
 
-\subsubsection{Excitation Temperature}
+\begin{equation}\label{eq:dNdv}
+\frac{dN}{dv} = \left(\frac{8\pi k \nu^2_{ul}}{h c^3 A_{ul} g_u}\right) Q_{\rm rot}(T_{\rm ex})~ e^{E_u / kT_{\rm ex}} \frac{T_R(v)}{f}
+\end{equation}
 
-\subsubsection{$^{12}$CO Opacity Correction}
-In Orion, \co[12] is usually optically thick \citep{Kong18}. 
+where $\nu_{ul} = 115.271$ GHz is the frequency of the \co[12](1-0) transition, $A_{ul} = 7.203 \times 10^{-8}$~s$^{-1}$ is the Einstein A coefficient, $E_u/k = 5.53$~K is the energy of the upper level, $g_u = 3$ is the degeneracy of the upper level, $Q_{\rm rot}$ is the partition function (calculated to $j=100$), $T_{\rm ex}$ is the excitation temperature defined in Section~\ref{sec:tex}, $T_R(v)$ is the opacity-corrected brightness temperature of \co[12]{}, and $f$ is the abundance ratio of 
+\co[12]/H$_{2}$. We assume an abundance ratio of $f = 1 \times 10 ^{-4}$ \citep{Frerking82}.
 
-\subsubsection{Low-Velocity Outflow Emission}
-Outflows are conspicuous because of their high-velocity emission. But outflows also exist at lower velocities. \citet{Dunham14} note that escape velocities from protostars can be as low as 0.1 \kms. As these speeds are much lower than typical cloud CO line-widths. this low-velocity outflow material is often difficult to disentangle from the host molecular cloud.
+We then calculate the mass of H$_2$ in each voxel $M_{\rm H_2} = \mu_{\rm H_2} m_{\rm H} A_{\rm pixel} N_{\rm H_2}$, where $\mu_{\rm H_2} = 2.8$ is the mean molecular weight of $H_2$ \citep{Kaufmann08}, $m_{\rm H} = 1.674 \times 10^{-24}$~g is the mass of the hydrogen atom, and $A_{\rm pixel} = 1.6 \times 10^{-5}$~pc$^2$ is the spatial area subtended by each pixel at the distance of the cloud.
+
+\subsection{Low-Velocity Outflow Emission}
+Outflows are conspicuous because of their high-velocity emission. But outflows also exist at lower velocities. \citet{Dunham14} note that escape velocities from protostars can be as low as 0.1 \kms. As these speeds are much lower than typical cloud CO line-widths, this low-velocity outflow material is often difficult to disentangle from the host molecular cloud.
 
 The low-velocity contribution to the total outflow mass can be quite significant. \citet{Dunham14} found that adding the inferred low-velocity emission increased the mass of outflows by a factor of 7.7 on average, with some outflows increasing by an order of magnitude or more. Outflow momentum and energy increased by factors of 3 to 5, on average.  \citet{Offner11} found that high-velocity outflow emission underestimated the total outflow mass by a factor of 5 in synthetic observations of simulated outflows. Clearly, low-velocity emission should be accounted for when assessing the absolute impact of outflows on the cloud.
+
+
+
+
 
 \subsection{Significance of Outflow Feedback }
 
 
 
 \section{Outflow - Filament Alignment}
-Outflows are ejected along the angular momentum axis of the protostellar disk. If mass accretion proceeds hierarchically, from larger scales of the cloud down to the protostellar scale, then the angular momentum axis of the protostar will trace the orientation of mass accretion flows. Protostars tend to form along narrow filaments of dense gas, and may accrete mass either along (parallel to) or across (perpendicular to) their host filaments. (CITE MOLECULAR FILAMENT PAPERS). If protostar predominately accrete mass along filaments, their outflows should be ejected perpendicular to the long axis of the filament. Conversely, if protostars accrete mostly across filaments, their outflows will be ejected parallel to the filament axis. 
+Outflows are ejected along the angular momentum axis of the protostellar disk. If mass accretion proceeds hierarchically, from larger scales of the cloud down to the protostellar scale, then the angular momentum axis of the protostar will trace the orientation of mass accretion flows. Protostars tend to form along narrow filaments of dense gas, and may accrete mass either along (parallel to) or across (perpendicular to) their host filaments. (CITE MOLECULAR FILAMENT PAPERS). If protostars predominately accrete mass along filaments, their outflows should be ejected perpendicular to the long axis of the filament. Conversely, if protostars accrete mostly across filaments, their outflows will be ejected parallel to the filament axis. 
 
 
 In simulations, \citet{Offner16} (DESCRIBE OFFNER16 FINDINGS). \citet{Li18} (DESCRIBE LI18 FINDINGS) showed that moderately strong magnetic fields produce a perpendicular alignment between outflows and filaments.  (FIELDING15? cited by Shuo)
