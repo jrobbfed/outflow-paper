@@ -5,16 +5,17 @@
 \usepackage{amsmath}
 \usepackage[flushleft]{threeparttable} 
 \usepackage{array}
-\setlength\extrarowheight{  2pt}
+\setlength\extrarowheight{2pt}
 
 \newcommand{\example}{V380 Ori-NE}
 \newcommand{\tex}{$T_{\rm ex}$}
 \newcommand{\nrobeam}{$21\arcsec$}
-\newcommand{\resolutionpc}{$0.04$~pc}
+% \newcommand{\resolutionpc}{$0.04$~pc}
 \newcommand{\distance}{$414$~pc}
 \newcommand{\Msun}{$M_\odot$}
 \newcommand{\Mdot}{$M_\odot$~yr$^{-1}$}
 \newcommand{\kms}{km~s$^{-1}$}
+% \newcommand{\c18o}{C$^{18}$O}
 
 
 \newcommand{\co}[1][]{\ensuremath{^{#1}}CO}
@@ -42,7 +43,7 @@
 
 \end{abstract}
 
-\keywords{ISM: clouds --- ISM: individual objects (Orion A) ---  stars: formation}
+\keywords{ISM: clouds --- ISM: individual objects (Orion A) ---  stars: formation} 
 
 \section{Introduction}
 
@@ -51,11 +52,14 @@
 \section{Observations}
 
 \subsection{CO Maps}
+The CARMA-NRO Orion survey combines interferometric observations from the Combined Array for Research in Millimeter-wave Astronomy (CARMA) with single-dish observations from the 45 m telescope at the Nobeyama Radio Observatory (NRO). The combination of interferometric and single-dish observations result in an unprecedented spatial dynamic range of 0.015 - 15 pc in the Orion A molecular cloud.
+
+We use the \co[12](1-0), \co[13](1-0), and C$^{18}$O(1-0) data first presented in \citet{Kong18}. The \co[12]{} data have a resolution of $10\arcsec\times8\arcsec$ and velocity resolution of $0.25$ \kms{}. The original \co[13] data have a resolution of $8\arcsec\times6\arcsec$ and a velocity resolution of $0.22$ \kms{}, but we smooth the \co[13]{} data to match the resolution of \co[12]{}. The C$^{18}$O data have a resolution of $10\arcsec\times8\arcsec$ and a velocity resolution of $0.22$ \kms{}.
 
 \subsection{Source Catalogs}
+We primarily use the Herschel Orion Protostar Survey \citep[HOPS;][]{Furlan16} to assign driving source to outflow emission. \textcolor{red}{A little about HOPS, citations.}
 
 \subsection{Other Outflow Studies}
-
 
 \section{Description of Outflows}
 
@@ -64,7 +68,7 @@
 \subsection{Driving Sources}
 
 
-\section{Physical Properties of Outflows - draw from Dunham et al. 2014, Zhang et al. 2016, Tanabe et al. 2019}
+\section{Physical Properties of Outflows}
 To calculate the physical properties of outflows, we adapt the methods described by \citet{Arce01}, \citet{Dunham14}, and \citet{ZhangY16}. 
 
 \subsection{Extracting Outflow Emission}\label{sec:extraction}
@@ -77,7 +81,7 @@ To summarize, those pixels above $5\sigma$ in integrated high-velocity $^{12}$CO
 \subsection{Systemic Velocity}\label{sec:vsys}
 To calculate outflow energetics, we need to know the systemic velocity $v_{\rm sys}$ of the outflow source. We use the CARMA-NRO Orion C$^{18}$O data \citep{Kong18} for this purpose. We fit a gaussian model to the average C$^{18}$O spectrum within a 15\arcsec{} radius around the outflow source and define the mean of this gaussian to be $v_{\rm sys}$. In most cases, there is only one significant velocity component in the C$^{18}$O spectrum. In the few outflows where multiple velocity components are detected, we adopt the velocity of the most significant component as $v_{\rm sys}$.
 
-\subsubsection{Excitation Temperature}\label{sec:tex}
+\subsection{Excitation Temperature}\label{sec:tex}
 We estimate the excitation temperature of $^{12}$CO, \tex, using the equation from \citet{Rohlfs96}, which assume $^{12}$CO is optically thick in the line core:
 
 \begin{equation}\label{eq:Tex}
@@ -88,7 +92,7 @@ We define $T_{\rm peak}$ for each outflow to be the peak temperature of the aver
 
 
 \subsection{$^{12}$CO Opacity Correction}\label{sec:opacity}
-In Orion, \co[12] is usually optically thick \citep{Kong18}. Therefore, if we do not correct for opacity we may miss a substantial amount of outflow mass. By comparing to more optically thin tracers, studies have long shown that outflows tend to be optically thick in $^{12}$CO, at least at lower velocities \citep[e.g.,][]{Goldsmith84,Arce01}. \citet{Dunham14} find that correcting for the optical depth of outflows increases their mass by a factor of 3 on average. Despite this, outflow studies that lack an optically thin tracer often assume that all outflow emission is optically thin \citep[e.g. in Orion,][]{Morgan91,Takahashi08}. 
+In Orion, \co[12]{} is usually optically thick \citep{Kong18}. Therefore, if we do not correct for opacity we may miss a substantial amount of outflow mass. By comparing to more optically thin tracers, studies have long shown that outflows tend to be optically thick in \co[12]{}, at least at lower velocities \citep[e.g.,][]{Goldsmith84,Arce01}. \citet{Dunham14} find that correcting for the optical depth of outflows increases their mass by a factor of 3 on average. Despite this, outflow studies that lack an optically thin tracer often assume that all outflow emission is optically thin \citep[e.g. in Orion,][]{Morgan91,Takahashi08}. 
 
 \citet{Tanabe:submitted} adopt an average \co[12]{} optical depth of 5 for their entire outflow catalog. They apply this constant correction factor to every velocity channel. But \citet{Dunham14} show that the optical depth varies with velocity: optical depth decreases with increasing velocity away from the cloud core. We follow \citet{Dunham14} and \citet{ZhangY16} and use the ratio of $^{12}$CO / $^{13}$CO to derive a velocity-dependent opacity correction for each outflow.
 
@@ -105,7 +109,7 @@ where we assume the abundance ratio [\co[12]]/[\co[13]] is 62 \citep{Langer93} a
 In Figure~\ref{fig:opacity}, we show an example of the \co[12]{}/\co[13]{} ratio spectrum and fit for the \example{} outflow. 
 
 %%%% DISCUSS THE MASS SPECTRUM, MAYBE BEFORE THE LOW-VELOCITY SECTION?
-\subsection{Mass, Momentum, and Kinetic Energy}
+\subsection{Outflow Mass}
 After correcting for opacity, we use the \co[12]{} emission to calculate the H$_2$ column density in each velocity channel. From Equation A6 in \citet{ZhangY16},
 
 \begin{equation}\label{eq:dNdv}
@@ -115,38 +119,77 @@ After correcting for opacity, we use the \co[12]{} emission to calculate the H$_
 where $\nu_{ul} = 115.271$ GHz is the frequency of the \co[12](1-0) transition, $A_{ul} = 7.203 \times 10^{-8}$~s$^{-1}$ is the Einstein A coefficient, $E_u/k = 5.53$~K is the energy of the upper level, $g_u = 3$ is the degeneracy of the upper level, $Q_{\rm rot}$ is the partition function (calculated to $j=100$), $T_{\rm ex}$ is the excitation temperature defined in Section~\ref{sec:tex}, $T_R(v)$ is the opacity-corrected brightness temperature of \co[12]{}, and $f$ is the abundance ratio of 
 \co[12]/H$_{2}$. We assume an abundance ratio of $f = 1 \times 10 ^{-4}$ \citep{Frerking82}.
 
-We then calculate the mass of H$_2$ in each voxel $M_{\rm H_2} = \mu_{\rm H_2} m_{\rm H} A_{\rm pixel} N_{\rm H_2}$, where $\mu_{\rm H_2} = 2.8$ is the mean molecular weight of $H_2$ \citep{Kaufmann08}, $m_{\rm H} = 1.674 \times 10^{-24}$~g is the mass of the hydrogen atom, and $A_{\rm pixel} = 1.6 \times 10^{-5}$~pc$^2$ is the spatial area subtended by each pixel at the distance of the cloud.
+We then calculate the mass in each voxel $M = \mu_{\rm H_2} m_{\rm H} A_{\rm pixel} N_{\rm H_2}$, where $\mu_{\rm H_2} = 2.8$ is the mean molecular weight of H$_2$ \citep{Kauffmann08}, $m_{\rm H} = 1.674 \times 10^{-24}$~g is the mass of the hydrogen atom, and $A_{\rm pixel} = 1.6 \times 10^{-5}$~pc$^2$ is the spatial area subtended by each pixel at the distance of the cloud. In blue (red) outflow lobes we sums the total mass in each velocity channel blueward (redward) of $v_{\rm sys}$ and arrive at the outflow mass spectrum $dM/dv$. We only consider pixels above $3\sigma$ and within their respective outflow lobe region in this mass calculation. Figure~\ref{fig:dmdv} shows an example mass spectrum for the \example{} outflow.
+
+The total mass of each outflow lobe is obtained by integrating the mass spectrum over the relevant velocity range. For a lower limit on the mass, we consider only the high-velocity component: those velocity channels farther from $v_{\rm sys}$ than the visually determined outflow velocity (Section~\ref{sec:identification}). These velocities were chosen to include as much outflow emission as possible while avoiding contamination by the main cloud. However, if we only consider this high-velocity outflow material, we may miss a significant fraction of the total mass.
 
 \subsection{Low-Velocity Outflow Emission}
 Outflows are conspicuous because of their high-velocity emission. But outflows also exist at lower velocities. \citet{Dunham14} note that escape velocities from protostars can be as low as 0.1 \kms. As these speeds are much lower than typical cloud CO line-widths, this low-velocity outflow material is often difficult to disentangle from the host molecular cloud.
 
-The low-velocity contribution to the total outflow mass can be quite significant. \citet{Dunham14} found that adding the inferred low-velocity emission increased the mass of outflows by a factor of 7.7 on average, with some outflows increasing by an order of magnitude or more. Outflow momentum and energy increased by factors of 3 to 5, on average.  \citet{Offner11} found that high-velocity outflow emission underestimated the total outflow mass by a factor of 5 in synthetic observations of simulated outflows. Clearly, low-velocity emission should be accounted for when assessing the absolute impact of outflows on the cloud.
+The low-velocity contribution to the total outflow mass can be quite significant. \citet{Dunham14} found that adding the inferred low-velocity emission increased the mass of outflows by a factor of 7.7 on average, with some outflows increasing by an order of magnitude or more. Outflow momentum and energy increased by factors of 3 to 5, on average. \citet{Offner11} found that high-velocity outflow emission underestimated the total outflow mass by a factor of 5 in synthetic observations of simulated outflows. Clearly, low-velocity emission should be accounted for when assessing the absolute impact of outflows on the cloud. We describe our method, adapted from \citet{Dunham14} for recovering this low-velocity outflow mass below. 
 
+For each outflow lobe, we fit the opacity-corrected mass spectrum with a gaussian. For 'low' velocities between $v_{\rm sys}$ and the visually determined outflow velocity ($v_{\rm blue}$ or $v_{\rm red}$), we subtract this gaussian fit from the mass spectrum and define any excess mass as low-velocity outflow mass. To reduce the amount of extraneous cloud mass introduced with this method, we exclude all velocity channels within 1 \kms{} of $v_{\rm sys}$. Figure~\ref{dmdv} demonstrates this procedure for the \example{} outflow. 
 
+Generally, the low-velocity outflow mass is significantly greater than the mass at high velocities. Because this method assumes the cloud mass spectrum is fit well by a gaussian, we expect that the low-velocity mass will often be contaminated by ambient cloud material. Thus, for each outflow lobe, we consider the high-velocity outflow mass to be a lower limit and the high-velocity plus low-velocity outflow mass to be an upper limit on the total outflow lobe mass. We report these mass ranges for each outflow lobe in Table~\ref{tab:physics}.
 
+\subsection{Momentum and Kinetic Energy}
 
+We define the momentum per velocity channel to be $dP/dv = (dM/dv) v_{\rm out}$, where $dM/dv$ is the mass spectrum discussed in Section~\ref{sec:dmdv} and $v_{\rm out}$ is the velocity relative to $v_{\rm sys}$. Similarly, the kinetic energy per velocity channel is $dE/dv = (1/2) (dM/dv)  v_{\rm out}^2$. We sum the momentum and kinetic energy separately for low velocities, with the ambient cloud corrected mass spectrum, and high velocities. In Table~\ref{tab:physics}, we report the momentum and kinetic energy of each outflow lobe.
 
-\subsection{Significance of Outflow Feedback }
+\subsection{Dynamical Time}
+We use the same method as \citet{Curtis10} to estimate the dynamical time $t_{\rm dyn}$ of each outflow lobe. Assuming the outflow has been expanding uniformly at the same velocity since it was launched, $t_{\rm dyn} = R / v_{\rm max}$, where $R$ is the length of the outflow and $v_{\rm max}$ is the maximum outflow velocity. We define $R$ to be the projected distance from the outflow source to the farthest part of the outflow lobe and $v_{\rm max}$ as the greatest velocity relative to $v_{\rm sys}$ where \co[12]{} is detected at $3\sigma$. Some outflows are detectable all the way to the limits of the \co[12]{} spectral coverage (-2~\kms{} in the blue, 20~\kms{} in the red). In these cases, $v_{\rm max}$ is a lower limit, as are the mass and mass-derived properties. Figure~\ref{fig:vmax} shows our determination of $v_{\max}$ for the \example{} outflow. We report $R$, $v_{\max}$, and $t_{\rm dyn}$, for each outflow lobe in Table~\ref{tab:physics}.
 
+We also calculate the mass loss rate, momentum injection rate, and energy injection rate by dividing the outflow mass, momentum, and kinetic energy by $t_{\rm dyn}$. \textcolor{red}{We use these quantities to compare the impact of outflows on the cloud to the turbulent dissipation in Section~\ref{sec:impact}.}
 
+\subsection{Outflow Position Angle and Opening Angles}
+Most studies estimate the outflow position angle (PA) by eye \citep[e.g.][]{Morgan91,Takahashi08,Plunkett13,Stephens17,Kong19,Tanabe:submitted}. We adopt a more reproducible and objective method to measure outflow position and opening angles (OA)  suggested by M. Dunham (2019, private communication) and modeled after the simulated outflow analysis carried out by \citet{Offner11}.
+
+For each outflow lobe, we make an initial guess of the PA, measured counterclockwise (east) from the north celestial pole by convention. This initial guess is the angle from the outflow source to the peak of the integrated \co[12]{} over the velocity range of the outflow lobe. Then, we calculate the angle of every pixel in the outflow lobe relative to this initial guess. We fit the distribution of these angles with a gaussian and define the mean of the gaussian to be the PA of that outflow lobe. We define the opening angle of the outflow to be the full-width at quarter maximum (FWQM) of the gaussian, following the definition by \cite{Offner11}. We find this automated method does a suitable job producing a similar PA and OA to a visual determination. Furthermore, when comparing the outflow PA with with filament orientation (Section~\ref{sec:filament}), we avoid the risk of an artificial correlation produced by unintentional measurement bias. Figure~\ref{fig:angles} shows the distribution of pixel position angles and gaussian fit for the \example{} outflow.
+
+\section{Impact of Outflows on the Cloud}
+\textcolor{red}{Here is where I will discuss the aggregate impact of the outflows presented here and compare that to turbulent dissipation of the cloud as calculated by either Feddersen et al. 2018 and/or Tanabe. Also, I will compare the aggregate outflow impact calculated here with that presented in other studies, most prominently Tanabe and other Orion outflow studies like Takahashi+ 08 and Morgan+ 91. I will compare the aggregate impact of outflows to the expanding shells from Feddersen+18. Lastly, I will compare the aggregate impact of outflows to the turbulent statistic study in Feddersen+19. Also mention somewhere the dependence of all these properties on the outflow inclination, an unknown. Cite the factor by which the properties would change if all outflows had an average inclination of 45deg.}
 
 \section{Outflow - Filament Alignment}
-Outflows are ejected along the angular momentum axis of the protostellar disk. If mass accretion proceeds hierarchically, from larger scales of the cloud down to the protostellar scale, then the angular momentum axis of the protostar will trace the orientation of mass accretion flows. Protostars tend to form along narrow filaments of dense gas, and may accrete mass either along (parallel to) or across (perpendicular to) their host filaments. (CITE MOLECULAR FILAMENT PAPERS). If protostars predominately accrete mass along filaments, their outflows should be ejected perpendicular to the long axis of the filament. Conversely, if protostars accrete mostly across filaments, their outflows will be ejected parallel to the filament axis. 
+Outflows are ejected along the angular momentum axis of the protostellar disk. If mass accretion proceeds hierarchically, from larger scales of the cloud down to the protostellar scale, then the angular momentum axis of the protostar will trace the orientation of mass accretion flows. Protostars tend to form along narrow filaments of dense gas, and may accrete mass either along (parallel to) or across (perpendicular to) their host filaments. (CITE MOLECULAR FILAMENT PAPERS AND DESCRIBE SOMEWHERE A LITTLE ABOUT WHAT A FILAMENT ACTUALLY IS? HERE AND IN INTRO). If protostars predominately accrete mass along filaments, their outflows should be ejected perpendicular to the long axis of the filament. Conversely, if protostars accrete mostly across filaments, their outflows will be ejected parallel to the filament axis. 
 
 
 In simulations, \citet{Offner16} (DESCRIBE OFFNER16 FINDINGS). \citet{Li18} (DESCRIBE LI18 FINDINGS) showed that moderately strong magnetic fields produce a perpendicular alignment between outflows and filaments.  (FIELDING15? cited by Shuo)
 
 The alignment between CO outflows  and filaments alignment has been studied in Perseus by \citet{Stephens17} and in a massive infrared dark cloud (IRDC, \citealp{Kong19}). In Perseus, \citet{Stephens17} showed that outflows are consistent with being randomly oriented with respect to the filament, neither parallel nor perpendicular. In the IRDC G28.37+0.07, \cite{Kong19} showed that outflows are preferentially perpendicular to the filament axis. It remains to be seen whether this discrepancy arises from some meaningful difference between these clouds (e.g. evolutionary state or magnetic field strength) or by chance. 
 
-In Orion, \citet{Davis09} showed that H$_{2}$ outflows appear randomly oriented on the sky, showing no preferential alignment to the North-South integral-shaped filament. \citet{Tanabe19} studied the CO outflows in single-dish CO maps and found no evidence for alignment between outflows and the large-scale filaments in the cloud. However, the filamentary structure in Orion A is more complex than a single North-South integral-shaped filament. We use the C$^{18}$O filaments identified by \citet{Suri19} in our analysis.
+In Orion, \citet{Davis09} showed that H$_{2}$ outflows appear randomly oriented on the sky, showing no preferential alignment to the North-South integral-shaped filament. \citet{Tanabe:submitted} studied the CO outflows in single-dish CO maps and found no evidence for alignment between outflows and the large-scale filaments in the cloud. However, the filamentary structure in Orion A is more complex than a single North-South integral-shaped filament. Therefore, we use the C$^{18}$O filaments identified by \citet{Suri19} in our analysis.
 
 \subsection{$C^{18}O$ Filaments}
+\citet{Suri19} apply the Discrete Persistent Structures Extractor, DisPerSE \citep{Sousbie11} to extract filaments from the C$^{18}$O spectral cube. DisPerSE connects local maxima and saddle points in the intensity distribution, which are defined as filaments. \citet{Suri19} identify a total of 625 filaments across the Orion A cloud, each of which are defined by their PPV coordinates, allowing filaments that overlap spatially to be separated in velocity space. 
 
+For each outflow source, we search the filament catalog for the closest filament. \textcolor{red}{Because most of the outflow sources are located along lines of sight with a single significant C$^{18}$O velocity component, we ignore the filament velocity information and only consider projected distance on the sky.} We use cubic spline interpolation to approximate the discrete filament coordinates with a smooth curve. \footnote{We used the \url{splrep} and \url{splev} functions from the \url{scipy.interpolate} package for the spline interpolation. After experimenting with the smoothing parameter $s$ to find an optimal trade-off between smoothness and goodness-of-fit, we adopt $s = 0.1\times d_{\rm min}$ where $d_{\rm min}$ is the minimum distance between the filament and outflow source.} We take the slope of the tangent to the filament curve at the closest point to the outflow source to be the position angle of the filament, which is constrained to be between $-180$ and $180\degr$. Figure~\ref{fig:filament} shows an example of the spline interpolation and tangent fitting for the closest filament to the \example{} outflow.
 
+\subsection{Outflow-Filament $\gamma$}
 
+We follow \citet{Stephens17} and \citet{Kong19} in our definition of the angular separation between outflow and filament position angles, $\gamma$. For each outflow lobe, we define $\gamma$ to be 
 
+\begin{equation}
+    \gamma = \rm{MIN}\{|\rm{PA}_{\rm out} - \rm{PA}_{\rm fil}|, 180\degr - |\rm{PA}_{\rm out} - \rm{PA}_{\rm fil}|\},
+\end{equation}
+
+where PA$_{\rm out}$ and PA$_{\rm fil}$ are the position angles of the outflow lobe and the closest filament, respectively. \textcolor{red}{the value of $\gamma$ for each outflow lobe is recorded in Table~\ref{tab:physics}. Figure~\ref{fig:gamma_full} shows the distribution of $\gamma$ for the entire outflow catalog. The full sample of $\gamma$ shows no obvious clustering at either 0 or 90$\degr$.}
+
+\textcolor{red}{Discuss breaking the sample down into the outflows near filaments, citing Suri et al.'s filament widths, and definite outflows, since these have more well-defined position angles. Show the cumulative distribution of $\gamma$ for the full sample and these subsamples. Explain the difference between projected and 3D angle ala stephens and kong. Compare the CDF of gamma to the expected CDF in the parallel, perpendicular and random cases. Can we make any solid conclusions about the underlying distribution of gamma from these comparisons? Test with the anderson-darling test to see. Note caveats in the measurement of both position angles, the length scale over which filament orientation is probed, and compare to the random and perpendicular findings of stephens and kong, respectively.}
 
 \section{Conclusions}
+
+%outflow identification summary
+
+%outflow catalog summary
+
+%outflow impact summary
+
+%outflow-filament summary.
+
+%how this study could be extended.
+
+\include{physics_table.tex}
+
 
 \bibliographystyle{aasjournal}
 \bibliography{all.bib}
