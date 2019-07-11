@@ -3,6 +3,7 @@
 %%inline equations unless it's absolutely %%necessary!
 \relpenalty=9999
 \binoppenalty=9999
+\maxdeadcycles=1000
 
 \turnoffedit
 
@@ -313,6 +314,12 @@ We fist generate $10^7$ pairs of unit vectors uniformly distributed around the u
 
 Figure~\ref{fig:gamma_cdf} shows the cumulative distribution of $\gamma$ for the Monte Carlo simulations and each of the outflow-filament samples discussed in Section~\ref{sec:gamma}. Compared to the random distribution of $\gamma$, the outflow samples have a deficit of $\gamma < 40\degr$. In particular, the "Both" subsample with the 22 definite outflow lobes closest to their filaments contains only one lobe with $\gamma < 33\degr$ (the blue lobe of the SMZ 17 outflow) compared to the $\sim8$ which would be expected if $\gamma$ were distributed randomly.
 
+\begin{figure*}
+\epsscale{0.7}
+\plotone{gamma_cdf.pdf}
+\caption{Cumulative distribution of projected angle between outflows and filaments. The colored lines show the distribution of $\gamma$ for different subsets of our outflow catalog. The black lines show the expected distribution given three different model distributions. The parallel distribution contains only 3D angles between 0 and 20$\degr$, the random distribution contains all 3D angles between 0 and 90$\degr$, and the perpendicular distribution contains 3D angles between 70 and 90$\degr$. The results of Anderson-Darling tests between the observed and modeled distributions are in Table~\ref{tab:ad} (see Section~\ref{sec:gamma}).\label{fig:gamma_cdf}}
+\end{figure*}
+
 While Figure~\ref{fig:gamma_cdf} shows that the "Parallel" scenario is inconsistent with the observed distribution of $\gamma$, the "Perpendicular" distribution is more difficult to rule out. We apply the Anderson-Darling (AD) test \citep{Stephens74} to determine if the perpendicular or random distributions can be rejected for each outflow subsample. The AD $p$-values listed in Table~\ref{tab:ad} represent the likelihood that the observed outflow-filament $\gamma$ distribution is drawn from either the random or perpendicular distribution. We do not report the results of AD tests for the parallel case; the $p$-values for the parallel distribution are all close to zero.
 
 Based on the AD test, we reject the hypothesis that the full outflow sample is drawn from a perpendicular distribution with $>99.9\%$ confidence ($p < 0.001$), while the random distribution is not ruled out. For the definite subsample the results are similar, though we can only rule out the perpendicular distribution with $94\%$ confidence ($p = 0.06$). For the $d_{\rm fil} \leq 0.05~\rm{pc}$ subsample, we can rule out the perpendicular distribution with $98\%$ confidence ($p = 0.02$). Though these subsamples are unlikely to be drawn from a purely perpendicular distribution, their $p$-values are higher than the equivalent in \citet{Stephens17}. We do not test models with a mixture of perpendicular and parallel outflow-filament alignment, but such a bimodal distribution may be a better fit to our data than either random or perpendicular model alone.
@@ -325,11 +332,7 @@ In the IRDC G28, \citet{Kong19} found outflow-filament alignment consistent with
 
 While we find some evidence for perpendicular outflow-filament alignment in Orion A, previous studies have concluded that outflows and filaments are randomly aligned. \citet{Davis09} show that the position angles of H$_2$ jets in Orion A are distributed uniformly. They conclude that outflows are oriented randomly with respect to the $\sim$pc-scale North-South integral shaped filament. \citet{Tanabe:submitted} conclude the same using their CO outflow catalog. Our study is not directly comparable to these, as we use the C$^18$O filaments, which reveals the integral shaped filament to be made up of many smaller filamentary structures.
 
-\begin{figure*}
-\epsscale{0.7}
-\plotone{gamma_cdf.pdf}
-\caption{Cumulative distribution of projected angle between outflows and filaments. The colored lines show the distribution of $\gamma$ for different subsets of our outflow catalog. The black lines show the expected distribution given three different model distributions. The parallel distribution contains only 3D angles between 0 and 20$\degr$, the random distribution contains all 3D angles between 0 and 90$\degr$, and the perpendicular distribution contains 3D angles between 70 and 90$\degr$. The results of Anderson-Darling tests between the observed and modeled distributions are in Table~\ref{tab:ad} (see Section~\ref{sec:gamma}).\label{fig:gamma_cdf}}
-\end{figure*}
+
 
 \section{Conclusions}
 
@@ -356,16 +359,15 @@ The outflow-filament alignment may change as protostars evolve. A detailed compa
 \input{filament_table.tex}
 \input{ad_table.tex}
 
-\newpage
-
-\appendix
-
-\section{All Outflows in CARMA-NRO Orion}\label{sec:appendix}
-
-\input{appendix_figures.tex}
-
-
 
 \bibliographystyle{aasjournal}
 \bibliography{all.bib}
+
+
+% \appendix
+
+% \section{All Outflows in CARMA-NRO Orion}\label{sec:appendix}
+
+% \input{appendix_figures.tex}
+
 \end{document}
