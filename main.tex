@@ -7,6 +7,12 @@
 
 \turnoffedit
 
+\usepackage{totcount}
+
+\newtotcounter{citnum} %From the package documentation
+\def\oldbibitem{} \let\oldbibitem=\bibitem
+\def\bibitem{\stepcounter{citnum}\oldbibitem}
+
 \usepackage{lipsum}
 
 \usepackage{amsmath}
@@ -14,7 +20,7 @@
 \usepackage{array}
 \setlength\extrarowheight{2pt}
 
-\newcommand{\numnew}{?}
+\newcommand{\numnew}{11}
 \newcommand{\nlobes}{67}
 \newcommand{\example}{HOPS 68}
 \newcommand{\tex}{$T_{\rm ex}$}
@@ -37,7 +43,7 @@
 
 \begin{document}
 
-\title{CARMA-NRO Orion: Protostellar Outflows in the Orion A Molecular Cloud}
+\title{The CARMA-NRO Orion Survey: Protostellar Outflows and Filamentary Alignment}
 
 \author{Jesse R. Feddersen}
 \affiliation{Department of Astronomy, Yale University, P.O. Box 208101, New Haven, CT 06520-8101, USA}
@@ -49,34 +55,31 @@
 \email{jesse.feddersen@yale.edu}
 
 \begin{abstract}
-We identify 45 protostellar outflows in CO maps of the Orion A giant molecular cloud from the CARMA-NRO Orion survey. Our sample includes \textcolor{red}{\numnew{}} newly detected outflows and many previously known ones. We measure the mass and energetics of outflows, including material at low-velocities by correcting for cloud contributions. \textcolor{red}{The total momentum injected by the outflows is sufficient to maintain cloud turbulence.} We compare the outflow position angles to the orientation of C$^{18}$ filaments. We find that the full sample of outflows is consistent with being randomly oriented with respect to the filamentary structure. A subsample of the most reliable measurements shows a moderate perpendicular outflow-filament alignment which may reflect accretion of mass across the filament and down to the protostellar core.  %How many are newly identified?%
-%aggregate impact
-%\lipsum[4]
-
-We investigate the outflow-filament connection.
+We identify 45 protostellar outflows in CO maps of the Orion A giant molecular cloud from the CARMA-NRO Orion survey. Our sample includes \textcolor{red}{\numnew{}} newly detected outflows along with many previously known. We measure the mass and energetics of the outflows, including material at low-velocities by correcting for cloud contributions. The total momentum and kinetic energy injected by outflows is significant compared to the turbulent dissipation of the cloud. We also compare the outflow position angles to the orientation of C$^{18}$ filaments. We find that the full sample of outflows is consistent with being randomly oriented with respect to the filaments. A subsample of the most reliable measurements shows a moderately perpendicular outflow-filament alignment which may reflect accretion of mass across the filament and down to the protostellar core.
 \end{abstract}
 
 \keywords{ISM: clouds --- ISM: individual objects (Orion A) ---  stars: formation} 
 
 \section{Introduction}
-%\lipsum[1-4]
-%%Introduction to outflows.
-For a comprehensive review of protostellar outflows, see \citet{Bally16}.
+Stars form inside the densest parts of giant molecular clouds (GMCs) \citet{McKee07}. Around newly formed protostars, bipolar high-velocity flows of molecular gas, commonly present. These structures are so ubiquitous they can be observed even when the protostar itself is unseen \citep{Kong19}. While it is unclear how exactly outflows are launched, they likely arise from the interaction of the accretion disk with magnetic fields near the protostar \citep[e.g.][]{Konigl00,Shu00,Frank14}.
 
 %%Outflow impact.
+Outflows have been long sought as a mechanism for sustaining turbulence and slowing star formation in GMCs \citep{Nakamura07,Carroll09,Federrath15}. Surveys of outflows have repeatedly shown that they have enough aggregate momentum and kinetic energy to significantly offset the dissipation of turbulence, especially on cluster scales \citep{Arce10,Nakamura11,Plunkett13,Plunkett15,Li15}. More uncertain is the efficiency with which the outflows can drive turbulence at larger scales in order to maintain the observed turbulence in GMCs \citep{Brunt09,Padoan09,Carroll10}. For a comprehensive review of outflows, see \citet{Bally16}.
 
-%%Previous studies of outflows in orion.
+%%Introduction to filaments and filament-outflow connection (take this from the outflow-filament section
+In many GMCs, most of the star formation takes place in relatively narrow, dense filaments \citep{Arzoumanian11,Suri19}. If the angular momentum of a growing protostar is inherited from the mass accretion onto a filament, the protostellar spin and the filament direction will be correlated \citep{Bodenheimer95,Andre14,Li19}. If, however, the link between mass accretion at filament scales and protostellar scales is disrupted, e.g. by turbulence or interaction with protostellar companions, then the protostellar spin may not be correlated with the filament orientation \citep{Offner16,Lee17}.
 
-%%Introduction to filaments and filament-outflow connection
 
 %%Previous studies of filament-outflow connection.
-To try to distinguish between these scenarios, several studies have recently considered the relative orientation of outflows and filaments.
-\citet{Stephens17}, \citet{Kong19}, \citet{Davis09}, \citet{Tanabe:submitted}
+To distinguish between these scenarios, several studies have recently considered the relative orientation of outflows and filaments. Assuming the outflow direction traces the angular momentum of the protostar, a correlation between the outflow and filament direction could mean a connection between scales as small as a few hundred AU, where the outflow is launched, to the 0.1 pc of a typical filament. \citet{Davis09} measured the position angle of H$_2$ outflows in the Orion A GMC and found no correlation with the large-scale integral-shaped-filament (ISF). \citet{Stephens17} compared CO outflows with filaments extracted from \emph{Herschel} dust maps in the Perseus molecular cloud and found a random outflow-filament alignment. However, \citet{Kong19} recently found a preferentially perpendicular outflow-filament alignment in the IRDC G28.37+0.07
+
+%%Previous studies of outflows in orion.
+The Orion A GMC is an ideal environment for studying protostellar outflows and their connection to filaments. At a distance of 414~pc \citep{Menten07}, \footnote{We adopt a distance of 414~pc throughout this paper to be consistent with \citet{Tanabe:submitted}. Recent parallax measurements from GAIA Data Release 2 place Orion A slightly closer, at 380-400~pc \citep{Kounkel18,Grossschedl18,Kuhn19}.} it is one of the closest clouds forming both low- and high-mass stars. Following earlier outflow studies, \citet{Tanabe:submitted} recently carried out a systematic search of CO outflows in Orion. While our study overlaps with theirs, we use different methods to identify outflows and derive their physical properties. We also use the C$^{18}$O filament catalog from \citet{Suri19} for an entirely new analysis of the outflow-filament connection.
 
 %%In this paper
-In this paper, we present a catalogue of outflows identified in the CARMA-NRO Orion survey. 
+In this paper, we present a study of protostellar outflows in the CARMA-NRO Orion survey. In Section~\ref{sec:observations}, we describe the CARMA-NRO Orion CO data and protostar catalogs. In Section~\ref{sec:identification}, we describe how we search for outflows in the CO maps and present the outflow catalog. In Section~\ref{sec:physics}, we calculate the physical properties of the outflows and discuss their impact on the cloud. In Section~\ref{sec:filaments}, we discuss the relative orientation of outflows and C$^{18}$O filaments and compare to models for random, parallel, and perpenicular outflow-filament alignment. Finally, in Section~\ref{sec:conclusions}, we summarize our conclusions and discuss future directions. The entire outflow catalog is presented in the Appendix.
 
-\section{Observations}
+\section{Observations}\label{sec:observations}
 
 \subsection{CO Maps}
 The CARMA-NRO Orion survey combines interferometric observations from the Combined Array for Research in Millimeter-wave Astronomy (CARMA) with single-dish observations from the 45 m telescope at the Nobeyama Radio Observatory (NRO). The combination of interferometric and single-dish observations result in an unprecedented spatial dynamic range of 0.015 - 15 pc in the Orion A molecular cloud.
@@ -110,16 +113,23 @@ For each outflow, we determine a confidence rating of "Definite" or "Marginal". 
 
 While many studies have identified energetic outflows in the OMC 1 region \citep[e.g.][]{Schmid-Burgk90,Zapata05,Teixeira16,Bally17}, we avoid this region in our outflow search. Neither \citet{Davis09} nor \citet{Furlan16} cover the central part of the Orion Nebula, due to saturation and confusion with the bright nebulosity in this region. Aside from the lack of good source catalogs in this region, the CO velocity dispersion in OMC-1 is up to 100~km~s$^{-1}$, due to the BN/KL ``explosion'' \citep{Bally17}, making it hard to define blue/red outflow lobes. Thus, in this study we focus our outflow search outside of this region. 
 
-In total, we identify 45 outflows with 67 individual blue/red lobes. Of these, 11 were not identified by \citet{Tanabe:submitted}. We do not detect 10 of the outflows included in \citet{Tanabe:submitted}. Most of these non-detections consist of the most dubious outflows in that study, which we suspect are spurious due to the automated identification method they use. Of the 67 outflow lobes, we classify 38 as ``definite'' and 29 as ``marginal''. Table~\ref{tab:outflows} lists the source, location, $v_{\rm blue}$/$v_{\rm red}$, confidence score, and the corresponding outflow in \citet{Tanabe:submitted} for our entire catalog.
+In total, we identify 45 outflows with 67 individual blue/red lobes. Of these, 11 were not identified by \citet{Tanabe:submitted}. We do not detect 10 of the outflows included in \citet{Tanabe:submitted}. Most of these non-detections consist of the most dubious outflows in that study, which we suspect are spurious due to the automated identification method they use. Of the 67 outflow lobes, we classify 38 as ``definite'' and 29 as ``marginal''. Table~\ref{tab:outflows} lists the source, location, $v_{\rm blue}$/$v_{\rm red}$, confidence score, and the corresponding outflow in \citet{Tanabe:submitted} for our entire catalog. Figure~\ref{fig:overview} shows the outflow catalog on a map of the peak \co[12]{} temperature.
+
+\begin{figure*}
+\centering
+% \epsscale{1.5}
+\includegraphics[width=0.8\textwidth]{overview.pdf}
+\caption{Peak \co[12]{} temperature in Orion A with outflows. The blue (red) lines indicate blue (red) outflow lobes. The length of the lines denote the maximum length of the outflow lobe, $R_{\rm max}$(Section~\ref{sec:tdyn}. The orientation of the outflow lobes indicate the measured position angle (Section~\ref{sec:angles}). The green lines indicate C$^{18}$O filaments from \citet{Suri19} (Section~\ref{sec:filaments}). \label{fig:overview}}
+\end{figure*}
+
 
 Figure~\ref{fig:stamp} shows the outflow in OMC~2 driven by \example{}. This outflow is well-known in the literature (Outflow 12 in \citealp{Tanabe:submitted} and $FIR 2$ in \citealp{Takahashi08}). We use this outflow in Figures~\ref{fig:c18o_fit}-\ref{fig:filament} to demonstrate our methods for calculating the properties of the outflows. We present the entire outflow catalog in Appendix~\ref{sec:appendix}.
 
 %\lipsum[4-5]
 
-\begin{figure*}[]
+\begin{figure*}[htb!]
 \centering
-\epsscale{0.6}
-\plotone{stamp.pdf}
+\includegraphics[width=0.6\textwidth]{stamp.pdf}
 \caption{Outflow around \example{}. The blue (red) \textit{contours} show \co[12]{} integrated from -2 \kms{} to $v_{\rm blue}$ ($v_{\rm red}$ to 20 \kms{}), where $v_{\rm blue}$ and $v_{\rm red}$ are given in Table~\ref{tab:outflows}. Contour levels go from 5 to 50$\sigma$, in steps of 5$\sigma$ where $\sigma$ is the RMS error in the integrated map. The \textit{thick contours} show the region we extract for each lobe. The \textit{shaded wedges} show the best-fit position angle and opening angle for the outflow lobes. The \textit{black dotted line} shows the closest C$^{18}$O filament from \citet{Suri19}. \textit{Black squares} indicate HOPS protostars from \citet{Furlan16}, \textit{black crosses} indicate H$_2$ outflow sources from \citet{Davis09}, and small \textit{black points} indicate all \emph{Spitzer} YSOs from \citet{Megeath12}.\label{fig:stamp}}
 \end{figure*}
 
@@ -226,12 +236,12 @@ We use the same method as \citet{Curtis10} to estimate the dynamical time $t_{\r
 \caption{Maximum velocity of the \example{} outflow. The blue (red) lines show the mean \co[12]{} spectrum in the blue (red) lobe regions. The blue (red) dotted line marks the maximum blue (red) outflow velocity, defined as the first channel where \co[12]{} is not detected at $3\sigma$ (see Section~\ref{sec:tdyn}).\label{fig:vmax}}
 \end{figure}
 
-We also calculate the mass loss rate, momentum injection rate, and energy injection rate by dividing the outflow mass, momentum, and kinetic energy by $t_{\rm dyn}$. \textcolor{red}{In Section~\ref{sec:impact}, we use these quantities to compare the impact of outflows on the cloud to the turbulent dissipation.}
+We also calculate the mass loss rate, momentum injection rate, and energy injection rate by dividing the outflow mass, momentum, and kinetic energy by $t_{\rm dyn}$. In Section~\ref{sec:impact}, we use these quantities to compare the impact of outflows on the cloud to the turbulent dissipation.
 
 \subsubsection{Outflow Position Angle and Opening Angles\label{sec:angles}}
 Most studies estimate the outflow position angle (PA) by eye \citep[e.g.][]{Morgan91,Takahashi08,Plunkett13,Stephens17,Kong19,Tanabe:submitted}. We adopt a more reproducible and objective method to measure outflow position and opening angles (OA)  suggested by M. Dunham (2019, private communication) and modeled after the simulated outflow analysis carried out by \citet{Offner11}.
 
-For each outflow lobe, we make an initial guess of the PA, measured counterclockwise (east) from the north celestial pole by convention. This initial guess is the angle from the outflow source to the peak of the integrated \co[12]{} over the velocity range of the outflow lobe. Then, we calculate the angle of every pixel in the outflow lobe relative to this initial guess. We fit the distribution of these angles with a gaussian and define the mean of the gaussian to be the PA of that outflow lobe. We define the opening angle of the outflow to be the full-width at quarter maximum (FWQM) of the gaussian, following the definition by \cite{Offner11}. We find this automated method does a suitable job producing a similar PA and OA to a visual determination. Furthermore, when comparing the outflow PA with with filament orientation (Section~\ref{sec:filament}), we avoid the risk of an artificial correlation produced by unintentional measurement bias. Figure~\ref{fig:angles} shows the distribution of pixel position angles and gaussian fit for the \example{} outflow.
+For each outflow lobe, we make an initial guess of the PA, measured counterclockwise (east) from the north celestial pole by convention. This initial guess is the angle from the outflow source to the peak of the integrated \co[12]{} over the velocity range of the outflow lobe. Then, we calculate the angle of every pixel in the outflow lobe relative to this initial guess. We fit the distribution of these angles with a gaussian and define the mean of the gaussian to be the PA of that outflow lobe. We define the opening angle of the outflow to be the full-width at quarter maximum (FWQM) of the gaussian, following the definition by \cite{Offner11}. We find this automated method does a suitable job producing a similar PA and OA to a visual determination. Furthermore, when comparing the outflow PA with with filament orientation (Section~\ref{sec:filaments}), we avoid the risk of an artificial correlation produced by unintentional measurement bias. Figure~\ref{fig:angles} shows the distribution of pixel position angles and gaussian fit for the \example{} outflow.
 
 \begin{figure}
 % \epsscale{0.6}
@@ -254,20 +264,19 @@ The outflow physical properties tabulated in Table~\ref{tab:physics} are not cor
 Because we do not know the actual inclination of each outflow, we estimate the effect of inclination on the aggregate outflow impact by assuming a constant inclination for every outflow. The mean inclination angle, assuming any orientation is equally likely, is $57.3\degr$ (where $0\degr$ is a pole-on outflow). 
 \citet{Dunham14} summarize the inclination dependence of each outflow property in their Table 8. If all of the outflows are inclined $57.3\degr$, the total $\dot P$ ($\dot E$) will increase by a factor of 2.9 (5.3). Thus, after correcting for average inclination, $\dot P$ is  $20$-$72\%$ of $\dot P_{\rm turb}$ and $\dot E$ is $103$-$281\%$ of $\dot E_{\rm turb}$ (depending on whether low-velocity emission is included).
 
-We note this inclination correction assumes that all outflow motions are along the axis of the flow, with no transverse motions. \citet{Dunham14} caution that the inclination correction factors may be significantly smaller if transverse motions are present, as demonstrated by simulations from \citet{Downes07}. The same simulations show that accounting for the \emph{atomic} component results in additional momentum and energy of about the same magnitude as the inclination corrections discussed above. While the absolute value of the outflow impacts in Orion A remains highly uncertain, it is safe to say a significant fraction of the turbulent dissipation could be offset if outflows couple efficiently to the cloud. %\citet{Offner18} finds in magnetohydrodynamic simulations that outflows can transport energy to cloud scales via magnetosonic waves. This is a potential mechanism for driving turbulence at scales larger than the typical outflow length.
+We note this inclination correction assumes that all outflow motions are along the axis of the flow, with no transverse motions. \citet{Dunham14} caution that the inclination correction factors may be significantly smaller if transverse motions are present, as demonstrated by simulations from \citet{Downes07}. The same simulations show that accounting for the \emph{atomic} component results in additional momentum and energy of about the same magnitude as the inclination corrections discussed above. While the absolute impact of outflows in Orion A remains highly uncertain, it is safe to say a significant fraction of the turbulent dissipation could be offset if outflows couple efficiently to the cloud. %\citet{Offner18} find that outflows can transport energy to cloud scales via magnetosonic waves. This is one potential mechanism for driving turbulence at scales larger than the typical outflow length.
 
-\section{Outflow - Filament Alignment}\label{sec:filaments}
-Outflows are ejected along the angular momentum axis of the protostellar disk. If mass accretion proceeds hierarchically, from larger scales of the cloud down to the protostellar scale, then the angular momentum axis of the protostar will trace the orientation of mass accretion flows. Protostars tend to form along narrow filaments of dense gas, and may accrete mass either along (parallel to) or across (perpendicular to) their host filaments. (CITE MOLECULAR FILAMENT PAPERS AND DESCRIBE SOMEWHERE A LITTLE ABOUT WHAT A FILAMENT ACTUALLY IS? HERE AND IN INTRO). If protostars predominately accrete mass along filaments, their outflows should be ejected perpendicular to the long axis of the filament. Conversely, if protostars accrete mostly across filaments, their outflows will be ejected parallel to the filament axis. 
+\section{Outflow-Filament Alignment}\label{sec:filaments}
+Outflows are ejected along the angular momentum axis of the protostar. If mass accretion proceeds hierarchically, from larger scales of the cloud down to the protostellar scale, then the angular momentum axis of the protostar will trace the orientation of mass accretion flows \citep{Bodenheimer95}. Protostars tend to form along narrow filaments of dense gas \citep{Arzoumanian11}, and may accrete mass either along (parallel to) or across (perpendicular to) their host filaments. If protostars predominately accrete mass along filaments, their outflows should be ejected perpendicular to the long axis of the filament. Conversely, if protostars accrete mostly across filaments, their outflows will be ejected parallel to the filament axis. 
 
+In simulations, \citet{Offner16} find that turbulent fragmentation of protostellar cores produce outflows with variable position angles, and they predict a random distribution of outflow orientations under this turbulent fragmentation model. \citet{Li18} find outflows form preferentially perpendicular to filaments in their simulations of a strongly magnetized cloud. 
 
-In simulations, \citet{Offner16} (DESCRIBE OFFNER16 FINDINGS). \citet{Li18} (DESCRIBE LI18 FINDINGS) showed that moderately strong magnetic fields produce a perpendicular alignment between outflows and filaments.  (FIELDING15? cited by Shuo)
-
-The alignment between CO outflows  and filaments alignment has been studied in Perseus by \citet{Stephens17} and in a massive infrared dark cloud (IRDC, \citealp{Kong19}). In Perseus, \citet{Stephens17} showed that outflows are consistent with being randomly oriented with respect to the filament, neither parallel nor perpendicular. In the IRDC G28.37+0.07, \cite{Kong19} showed that outflows are preferentially perpendicular to the filament axis. It remains to be seen whether this discrepancy arises from some meaningful difference between these clouds (e.g. evolutionary state or magnetic field strength) or by chance. 
+The alignment between CO outflows and filaments has been studied in Perseus by \citet{Stephens17} and in a massive infrared dark cloud (IRDC, \citealp{Kong19}). In Perseus, \citet{Stephens17} showed that outflows are consistent with being randomly oriented with respect to the filament, neither parallel nor perpendicular. In the IRDC G28.37+0.07, \cite{Kong19} showed that outflows are preferentially perpendicular to the filament axis. It remains to be seen whether this discrepancy arises from some meaningful difference between these clouds (e.g. evolutionary state or magnetic field strength) or by chance. 
 
 In Orion, \citet{Davis09} showed that H$_{2}$ outflows appear randomly oriented on the sky, showing no preferential alignment to the North-South integral-shaped filament. \citet{Tanabe:submitted} studied the CO outflows in single-dish CO maps and found no evidence for alignment between outflows and the large-scale filamentary structure in the cloud. However, the filamentary structure in Orion A is more complex than a single North-South integral-shaped filament. Therefore, we use the C$^{18}$O filaments identified by \citet{Suri19} in our analysis.
 %mention that stephens considers different filament lenght scales too.
 
-\subsection{Filament Position Angles}
+\subsection{C18O Filaments}
 \citet{Suri19} apply the Discrete Persistent Structures Extractor, DisPerSE \citep{Sousbie11} to extract filaments from the C$^{18}$O spectral cube. DisPerSE connects local maxima and saddle points in the intensity distribution, which are defined as filaments. \citet{Suri19} identify a total of 625 filaments across the Orion A cloud, each of which are defined by their PPV coordinates, allowing filaments that overlap spatially to be separated in velocity space. 
 
 For each outflow source, we search the filament catalog for the closest filament. Because most of the outflow sources are located along lines of sight with a single significant C$^{18}$O velocity component, we ignore the filament velocity information and only consider projected distance on the sky. We use cubic spline interpolation to approximate the discrete filament coordinates with a smooth curve. We used the \url{splrep} and \url{splev} functions from the \url{scipy.interpolate} package for the spline interpolation. After experimenting with the smoothing parameter $s$ to find an optimal trade-off between smoothness and goodness-of-fit, we adopt $s = 0.1\times d_{\rm min}$ where $d_{\rm min}$ is the minimum distance between the filament and outflow source.
@@ -298,16 +307,13 @@ Many of the outflows in our catalog are not as clear as our example outflow driv
 
 To test whether more reliable outflows have a different distribution of $\gamma$, we consider a subsample of outflow lobes which we consider "Definite" (Table~\ref{tab:outflows}). Figure~\ref{fig:gamma_hist} shows that these outflows are not distributed significantly differently from the full sample.
 
-%%TALK ABOUT FILAMENT WIDTHS AND USING THE SUBSAMPLE OF MINIMUM FILAMENT DISTANCE HERE. 
-
 Aside from the uncertainties in calculating the outflow position angles discussed above, we consider the difficulty of assigning even a well-known outflow to a particular filament. Even though we select for the closest filament to each outflow source, we cannot exclude the possibility that other nearby filaments may be important to the environment of an outflow. In particular, the OMC-4 region contains spatially overlapping filaments which are distinct in velocity space \citep{Suri19} similar to the fibers identified by \citet{Hacar13}. Thus the distribution of $\gamma$ The incorrect assignment of outflows to filaments may introduce noise to the distribution of $\gamma$ and mask an underlying correlation between outflow and filament orientations. To address this concern, we compare the full sample to the closest outflow-filament pairs. We adopt a threshold on the projected outflow-filament distance ($d_{\rm fil}$) based on the typical filament width.
 
 \citet{Suri19} found an average filament FWHM of approximately 0.1~pc, similar to the ``characteristic'' filament width found using \emph{Herschel} dust continuum maps \citep[e.g.][]{Arzoumanian11,Koch15} However, \citet{Suri19} find a much larger spread in filament widths (about an order of magnitude around the mean). This is likely due to the fact that they allow the filament width to vary along its length, while most studies average over the entire filament length. Motivated by the mean filament width, we choose a threshold of $d_{\rm fil} \leq 0.05$~pc, which corresponds to an outflow source within the half-width at half maximum of an average filament. Figure~\ref{fig:gamma_hist} shows the distribution of $\gamma$ for this subset of outflows.
 
 Figure~\ref{fig:gamma_hist} shows that limiting the sample to the closest outflow-filament pairs with the highest confidence reduces the fraction of outflows at projected angles of 0-30\degr{} with respect to the nearest filaments. The angles we measure are all projected on the plane of the sky. To determine whether these outflows are preferentially aligned with the filaments, we must consider the underlying distribution of deprojected $\gamma$: the outflow-filament alignment in 3D.
 
-\subsection{Outflow-Filament Alignment}
-%%%HERE, talk about the difference between projected and 3D angles, the monte-carlo simulations of random/parallel/perpendicular, the cumulative distribution functions and the Anderson-Darling tests. Compare the results of the AD tests to Stephens and Kong, as well as the more qualitative assessments in Orion by Davis09 and Tanabe.
+\subsection{Model Comparison}
 Any outflow-filament pair can appear at any relative orientation on the plane of the sky, depending on the line-of-sight. In other words, an outflow observed perpendicular to a nearby filament may actually be parallel in space, and vice versa. Thus, we follow \citet{Stephens17} and \citet{Kong19} and run Monte Carlo simulations\footnote{See Appendix A of \citet{Stephens17} for a detailed description of the Monte Carlo simulations.} of random vector pairs to project different underlying distributions of $\gamma_{\rm 3D}$ onto the plane of the sky.
 
 We fist generate $10^7$ pairs of unit vectors uniformly distributed around the unit sphere. From this random uniform distribution, we draw two samples. In the parallel sample, we keep only those vector pairs separated by 0-20\degr. In the perpendicular sample, we keep the pairs separated by 70-90\degr. Then, we project these vectors onto the plane of the sky by setting one coordinate to 0 and calculate the projected angle between them, $\gamma$. By comparing the distribution of the observed $\gamma$ with the random, parallel, and perpendicular models, we investigate which of these underlying scenarios is most likely given the observations.
@@ -337,12 +343,12 @@ While we find some evidence for perpendicular outflow-filament alignment in Orio
 \section{Conclusions}
 
 %outflow identification summary
-
-%outflow catalog summary
-
+We identify 45 outflows in the CARMA-NRO Orion CO maps of Orion A. Eleven of these outflows are new detections. For the previously known outflows, we improve the earlier estimates of their mass by including a correction for low-velocity mass as well as a velocity-dependent opacity correction. Most of the outflows have HOPS protostars associated with them, and many are correlated with H$_2$ flows.
 %outflow impact summary
+The outflows contain significant momentum and kinetic energy compared to estimates for the turbulent dissipation in Orion A. If outflows couple efficiently to the cloud, they can maintain cloud turbulence and slow star-formation. There is still considerable uncertainty in the outflow impact, and a mechanism for transporting momentum from the outflow length scale to the larger cloud is needed (see \citealp{Offner18} for an option).
 
 %outflow-filament summary.
+We compare the outflow position angles to the orientation of nearby filaments from the C$^{18}$O catalog of \citet{Suri19}. The full outflow catalog is consistent with random outflow-filament alignment. The most reliable outflows which are closest to their filaments show a moderately perpendicular outflow-filament alignment and a random distribution is ruled out with moderate confidence.
 
 %how this study could be extended
 %how to better understand the impact of outflows on their environment. 
@@ -368,6 +374,6 @@ The outflow-filament alignment may change as protostars evolve. A detailed compa
 
 \section{All Outflows in CARMA-NRO Orion}\label{sec:appendix}
 
-\input{appendix_figures.tex}
+% \input{appendix_figures.tex}
 
 \end{document}
